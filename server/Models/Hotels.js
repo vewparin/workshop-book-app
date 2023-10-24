@@ -14,16 +14,6 @@ const hotelSchema = new mongoose.Schema({
     type:String,
     default: 'nopicture.jpg'
   },
-  bookings: [{
-    checkIn: Date,
-    checkOut: Date,
-    guests: Number,
-    price: Number
-  }],
-  standardPrice: Number,
-  discountPrice: Number,
-  promotionStartDate: Date,
-  promotionEndDate: Date,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

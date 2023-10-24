@@ -38,6 +38,7 @@ const SideBar = () => {
         image="/assets/17372.jpg"
         breakPoint="md"
         style={{ height: "100%" }}
+        backgroundColor="skyblue"
       >
         <div
           style={{ display: "flex", flexDirection: "column", height: "100%" }}
@@ -59,7 +60,7 @@ const SideBar = () => {
                     alignItems="center"
                     ml="15px"
                   >
-                    <Typography>ROITAI APP</Typography>
+                    <Typography><Link to={"/"}>BOOKING APP</Link></Typography>
                     <IconButton onClick={() => setisCollapsed(!isCollapsed)}>
                       <MenuOutlinedIcon />
                     </IconButton>
@@ -77,12 +78,12 @@ const SideBar = () => {
                       alt="profile-user"
                       width="100px"
                       height="100px"
-                      src={`/assets/user.jpg`}
+                      src={`/assets/viewvy.jpg`}
                       style={{ cursor: "pointer", borderRadius: "50%" }}
                     />
                   </Box>
                   <Box textAlign="center">
-                    <Typography sx={{ m: "10px 0 0 0" }}>ROITAI</Typography>
+                    <Typography sx={{ m: "10px 0 0 0" }}>ว้าวุ่น</Typography>
                     <Typography>DEV </Typography>
                   </Box>
                 </Box>

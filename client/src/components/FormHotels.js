@@ -2,8 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
-
+import { TextField, Box, Button } from '@mui/material'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import {
     remove,
     create,
@@ -14,8 +20,7 @@ import {
 
 
 const FormProduct = () => {
-    // javascript
-    const tam = 'tam roitai'
+
     const [data, setData] = useState([])
     const [form, setForm] = useState({})
 
@@ -71,69 +76,51 @@ const FormProduct = () => {
     return (
         <div>
             {/* HTML */}
-            FormProduct
-            <form onSubmit={handleSubmit} encType='multipart/from-data'>
-                <input
-                    type='text'
-                    name='name'
-                    onChange={e => handleChange(e)}
-                    placeholder='name'
-                /> <br />
+            FormAddProduct
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
 
-                <input type='text'
-                    name='detail'
-                    placeholder='detail'
-                    onChange={e => handleChange(e)}
-                /><br />
 
-                <input type='file'
-                    name='file'
-                    onChange={e => handleChange(e)}
-                /><br />
-
-                <input
-                    type='text'
-                    name='price'
-                    placeholder='price'
-                    onChange={e => handleChange(e)} />
-                <br />
-                <button>Submit</button>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <TextField label="name" name='name' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField label="location" name='location' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField label="detail" name='description' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField type="file" label="file" name='file' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField type="number" label="price" name='price' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                </div>
+                <Button variant="contained" type='submit'>Submit</Button>
             </form>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">name</th>
-                        <th scope="col">detail</th>
-                        <th scope="col">file</th>
-                        <th scope="col">price</th>
-                        <th scope="col">action</th>
-                        <th scope="col">edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data ? data.map((item, index) =>
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{item.name}</td>
-                                <td>{item.detail}</td>
-                                <td>{item.price}</td>
-                                <td>{item.file}</td>
-                                <td onClick={() => handleRemove(item._id)}>
-                                    delete
-                                </td>
-                                <td>
-                                    <Link to={'/edit/' + item._id}>
-                                        edit
-                                    </Link>
-                                </td>
-                            </tr>
-                        )
-                            : null
-                    }
-                </tbody>
-            </table>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>#</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>location</TableCell>
+                            <TableCell>description</TableCell>
+                            <TableCell>File</TableCell>
+                            <TableCell>Price</TableCell>
+                            <TableCell>Action</TableCell>
+                            <TableCell>Edit</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data ? data.map((item, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{index + 1}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.location}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.file}</TableCell>
+                                <TableCell>{item.price}</TableCell>
+                                <Button onClick={() => handleRemove(item._id)}>Delete</Button>
+                                <TableCell>
+                                    <Link to={'/edit/' + item._id}>Edit</Link>
+                                </TableCell>
+                            </TableRow>
+                        )) : null}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
 
         </div>

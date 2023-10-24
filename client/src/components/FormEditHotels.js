@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-
+import { TextField, Box, Button } from '@mui/material'
 import { read, update } from '../functions/Hotels'
 
 const FormEditProduct = () => {
@@ -13,7 +13,7 @@ const FormEditProduct = () => {
         detail: '',
         price: ''
     })
-    const [fileOld,setFileOld]= useState()
+    const [fileOld, setFileOld] = useState()
 
     useEffect(() => {
         loadData(params.id)
@@ -48,47 +48,27 @@ const FormEditProduct = () => {
         for (const key in data) {
             formImageData.append(key, data[key])
         }
-        formImageData.append('fileOld',fileOld)
+        formImageData.append('fileOld', fileOld)
         update(params.id, formImageData)
             .then(res => {
                 console.log(res)
-                navigate('/')
+                navigate('/admin/viewtable')
             })
             .catch((err) => console.log(err))
     }
 
     return (
-        <div>FormEditProduct 555
+        <div>FormEditProduct
 
             <form onSubmit={handleSubmit} encType='multipart/from-data'>
-                <input
-                    type='text'
-                    name='name'
-                    onChange={e => handleChange(e)}
-                    placeholder='name'
-                    value={data.name}
-                /> <br />
-
-                <input type='text'
-                    name='detail'
-                    placeholder='detail'
-                    value={data.detail}
-                    onChange={e => handleChange(e)}
-                /><br />
-
-                <input type='file'
-                    name='file'
-                    onChange={e => handleChange(e)}
-                /><br />
-
-                <input
-                    type='text'
-                    name='price'
-                    placeholder='price'
-                    value={data.price}
-                    onChange={e => handleChange(e)} />
-                <br />
-                <button>Submit</button>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <TextField label="name" name='name' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField label="location" name='location' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField label="detail" name='description' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField type="file" label="file" name='file' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                    <TextField type="number" label="price" name='price' onChange={e => handleChange(e)} variant="outlined" style={{ marginRight: '10px', marginBottom: '10px' }} />
+                </div>
+                <Button variant="contained" type='submit'>Submit</Button>
             </form>
 
         </div>
