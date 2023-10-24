@@ -1,6 +1,7 @@
 const User = require('../Models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
 exports.register = async (req, res) => {
     try {
         // Check if user exists
@@ -57,7 +58,7 @@ exports.login = async (req, res) => {
             }
         };
 
-        jwt.sign(payload, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(payload, 'secretkey', { expiresIn: '1d' }, (err, token) => {
             if (err) throw err;
             res.json({ token,payload });
         });

@@ -10,9 +10,9 @@ const hotelSchema = new mongoose.Schema({
   price: Number,
   description: String,
   available: Boolean,
-  image: {
-    data: Buffer,
-    contentType: String
+  file:{
+    type:String,
+    default: 'nopicture.jpg'
   },
   bookings: [{
     checkIn: Date,
